@@ -1,12 +1,11 @@
 ﻿using System;
+using Bem_Estar_Financeiro_Familiar.Utilitarios;
+using MySql.Data.MySqlClient;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Bem_Estar_Financeiro_Familiar.Dao
 {
-    internal class UsuarioDao
+    internal class UsuarioDao 
     {
         public void Insert(Usuario usuario)
         {
@@ -17,9 +16,9 @@ namespace Bem_Estar_Financeiro_Familiar.Dao
                 using (var conexao = Utilitarios.Conexao.Conectar())
                 using (var comando = new MySql.Data.MySqlClient.MySqlCommand(sql, conexao))
                 {
-                    comando.Parameters.AddWithValue("@Nome", usuario.Nome);
-                    comando.Parameters.AddWithValue("@Email", usuario.Email);
-                    comando.Parameters.AddWithValue("@Senha", usuario.Senha);
+                    comando.Parameters.AddWithValue("@Nome", usuario._Nome);
+                    comando.Parameters.AddWithValue("@Email", usuario._Email);
+                    comando.Parameters.AddWithValue("@Senha", usuario._Senha);
                     comando.ExecuteNonQuery();
                 }
             }
@@ -37,10 +36,10 @@ namespace Bem_Estar_Financeiro_Familiar.Dao
                 using (var conexao = Utilitarios.Conexao.Conectar())
                 using (var comando = new MySql.Data.MySqlClient.MySqlCommand(sql, conexao))
                 {
-                    comando.Parameters.AddWithValue("@Nome", usuario.Nome);
-                    comando.Parameters.AddWithValue("@Email", usuario.Email);
-                    comando.Parameters.AddWithValue("@Senha", usuario.Senha);
-                    comando.Parameters.AddWithValue("@Id_usuario", usuario.Id_Usuario);
+                    comando.Parameters.AddWithValue("@Nome", usuario._Nome);
+                    comando.Parameters.AddWithValue("@Email", usuario._Email);
+                    comando.Parameters.AddWithValue("@Senha", usuario._Senha);
+                    comando.Parameters.AddWithValue("@Id_usuario", usuario._Id_Usuario);
                     var linhas = comando.ExecuteNonQuery();
                     if (linhas == 0)
                     {
@@ -88,10 +87,10 @@ namespace Bem_Estar_Financeiro_Familiar.Dao
                     {
                         Usuario usuario = new Usuario
                         {
-                            Id_Usuario = leitor.GetInt32("id_usuario"),
-                            Nome = leitor.GetString("nome"),
-                            Email = leitor.GetString("email"),
-                            Senha = leitor.GetString("senha"),
+                            _Id_Usuario = leitor.GetInt32("id_usuario"),
+                            _Nome = leitor.GetString("nome"),
+                            _Email = leitor.GetString("email"),
+                            _Senha = leitor.GetString("senha"),
                         };
                         listaUusuarios.Add(usuario);
                     }
